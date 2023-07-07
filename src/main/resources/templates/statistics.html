@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<th:block>
+    <h3 style="text-align: center;color: lightslategrey; margin: 50px">За секој корисник да се најде бројот на нарачки, да се прикаже просечна сума на сите нарачки за сите корисници, вкупна сума на нарачките на купувачот, колку негови нарачки се над глобалниот просек за сума на нарачка и колку е вкупната сума на неговите нарачки кои се над просекот</h3>
+<div class="container mb-4" >
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Ime</th>
+                        <th scope="col">Vkupno naracki</th>
+                        <th scope="col">Prosecna suma na naracka za site kupuvaci</th>
+                        <th scope="col">Vkupna suma od site naracki na korisnikot</th>
+                        <th scope="col">Vkupno naracki nad prosek na korisnikot</th>
+                        <th scope="col">Vkupno suma na naracki nad prosek za korisnikot</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users} " class="product">
+                        <td th:each="u : ${user}" th:text="${u} ?: '0' " ></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <h3 style="text-align: center;color: lightslategrey; margin: 50px">За секој продукт наоѓаме во последните три месеци во колку нарачки е присутен, колкава е количината на продуктот во тие нарачки, просечна сума на нарачката во која е присутен продуктот, број на нарачки на продуктот кои корисникот сам ги подигнал, количина продадена на продуктот која корисникот сам ја подигнал, број на нарачки на продукот кои му биле доставени на корисникот и количина на продуктот која му била доставена на корисникот</h3>
+    <div class="container mb-4" >
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Produkt ime</th>
+                            <th scope="col">Broj na naracki vo koi e prisuten produktot</th>
+                            <th scope="col">Kolicina prodadeno od produktot</th>
+                            <th scope="col">Prosecna suma na naracka vo koja se sodrzi produktot</th>
+                            <th scope="col">Broj na naracki na produktot koi korisnikot sam ke gi podigne</th>
+                            <th scope="col">Kolicina prodadena na produktot bez dostava</th>
+                            <th scope="col">Broj na naracki na produktot koi ke bidat dostaveni na korisnikot</th>
+                            <th scope="col">Kolicina prodadena na produktot preku dostava</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product : ${products} " class="product">
+                            <td th:each="p : ${product}" th:text="${p} ?: '0' " ></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</th:block>

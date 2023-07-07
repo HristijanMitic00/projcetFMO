@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading">Shopping cart for
+                <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
+            </h3>
+        </div>
+    </section>
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${products.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Total Price for product</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <span th:each="p:${po}">
+                        <tr th:each="product : ${products}" th:if="${product.getIdProdukt()}  == ${p.getIdProdukt()}" class="cart-item">
+                            <td th:text="${product.getIme()}"></td>
+                            <td th:text="${p.getCena()}">Cena</td>
+                            <td th:text="${p.getKolicina()}"></td>
+                        </tr>
+                            </span>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <label>Total price </label>
+                    <span th:text="${order.getVkupnoSuma()}"></span></div>
+
+                    <form  th:action="@{'/order/{id}/success' (id=${order.getIdNaracka()})}" th:method="POST">
+                        <label>Adresa za dostava</label>
+                        <input type="text" name="address" id="address" placeholder="/">
+                        <button type="submit"
+                                class="btn btn-sm btn-primary cart-product">
+                            <i class="fa fa-trash">Order</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

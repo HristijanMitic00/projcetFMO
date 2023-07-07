@@ -1,10 +1,11 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "kategorija",  catalog = "db_202223z_va_prj_fmo")
 public class Kategorija {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -13,6 +14,12 @@ public class Kategorija {
     @Basic
     @Column(name = "ime")
     private String ime;
+
+
+    public Kategorija(){}
+    public Kategorija(String ime) {
+        this.ime = ime;
+    }
 
     public int getIdKategorija() {
         return idKategorija;

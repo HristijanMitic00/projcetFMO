@@ -1,18 +1,18 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "magacioner",  catalog = "db_202223z_va_prj_fmo")
 public class Magacioner {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_korisnik")
     private int idKorisnik;
-    @Basic
-    @Column(name = "id_magacin")
-    private int idMagacin;
+    @ManyToOne
+    @JoinColumn(name = "id_magacin")
+    private Magacin magacin;
 
     public int getIdKorisnik() {
         return idKorisnik;
@@ -22,12 +22,12 @@ public class Magacioner {
         this.idKorisnik = idKorisnik;
     }
 
-    public int getIdMagacin() {
-        return idMagacin;
+    public Magacin getMagacin() {
+        return magacin;
     }
 
-    public void setIdMagacin(int idMagacin) {
-        this.idMagacin = idMagacin;
+    public void setMagacin(Magacin magacin) {
+        this.magacin = magacin;
     }
 
     @Override
@@ -35,11 +35,11 @@ public class Magacioner {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Magacioner that = (Magacioner) o;
-        return idKorisnik == that.idKorisnik && idMagacin == that.idMagacin;
+        return idKorisnik == that.idKorisnik && magacin == that.magacin;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idKorisnik, idMagacin);
+        return Objects.hash(idKorisnik, magacin);
     }
 }

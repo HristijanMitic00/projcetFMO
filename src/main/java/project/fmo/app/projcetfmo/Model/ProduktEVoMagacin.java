@@ -1,6 +1,6 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Objects;
 

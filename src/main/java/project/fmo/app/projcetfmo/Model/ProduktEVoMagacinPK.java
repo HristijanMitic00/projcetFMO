@@ -1,9 +1,7 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.*;
+
 
 import java.io.Serializable;
 import java.util.Objects;

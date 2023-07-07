@@ -1,12 +1,18 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 @Entity
-public class Korisnik {
+@Table(schema = "project", name = "korisnik",  catalog = "db_202223z_va_prj_fmo")
+public class Korisnik implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_korisnik")
@@ -20,6 +26,16 @@ public class Korisnik {
     @Basic
     @Column(name = "kreiran_na_datum")
     private Timestamp kreiranNaDatum;
+
+
+    public Korisnik(){
+
+    }
+    public Korisnik(String imePrezime, String passwordKorisnik, Timestamp kreiranNaDatum) {
+        this.imePrezime = imePrezime;
+        this.passwordKorisnik = passwordKorisnik;
+        this.kreiranNaDatum = kreiranNaDatum;
+    }
 
     public int getIdKorisnik() {
         return idKorisnik;
@@ -64,5 +80,40 @@ public class Korisnik {
     @Override
     public int hashCode() {
         return Objects.hash(idKorisnik, imePrezime, passwordKorisnik, kreiranNaDatum);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

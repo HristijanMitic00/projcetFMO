@@ -1,9 +1,7 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.*;
+
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,12 +9,12 @@ import java.util.Objects;
 public class NarackaSodrziProduktPK implements Serializable {
     @Column(name = "id_produkt")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProdukt;
     @Column(name = "id_naracka")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idNaracka;
+
+    public NarackaSodrziProduktPK(){}
 
     public int getIdProdukt() {
         return idProdukt;

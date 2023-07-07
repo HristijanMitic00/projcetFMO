@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,34 +12,65 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+<header xmlns:th="http://www.thymeleaf.org">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">FMO</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="home.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="statistics.html">Statistics</a></li>
-        <li><a href="delivery.html">Delivery</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="register.html"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-        <li><a href="/login"><span class="glyphicon glyphicon-user"></span>Login</a></li>
-        <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-        <li><a href="/logout"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
-      </ul>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item m-auto">
+            <a class="nav-link active" href="/products">Products</a>
+          </li>
+          <li class="nav-item m-auto" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="nav-link active" th:href="@{/statistics}" th:method="GET">Statistics</a>
+          </li>
+          <li class="nav-item m-auto" sec:authorize="hasRole('ROLE_DELIVER')">
+            <a class="nav-link active" th:href="@{/delivery}" th:method="GET">Delivery</a>
+          </li>
+        </ul>
+
+
+        <ul class="nav navbar-nav navbar-right">
+
+
+          <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+            <a class="btn btn-success btn-sm ml-3" th:href="@{/order}" th:method="GET">
+              <i class="fa fa-shopping-cart"></i> Cart
+            </a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <a class="btn btn-light btn-sm ml-3" href="/logout">
+              <i class="fa fa-shopping-cart"></i> Logout
+            </a>
+          <li class="nav-item">
+            <a class="btn btn-light btn-sm ml-3" sec:authorize="!isAuthenticated()" href="/register">
+              <i class="fa fa-shopping-cart"></i> Register
+            </a>
+          </li>
+          <li class="nav-item" sec:authorize="!isAuthenticated()">
+            <a class="btn btn-light btn-sm ml-3" href="/login">
+              <i class="fa fa-shopping-cart"></i> Login
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>
 
 
 
-<section th:include="${bodyContent}">
+<section th:include="${bodyContent}"></section>
 
 
 
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center" style="padding-top: 100px">
   <p>FMO Store</p>
   <p>2023</p>
   <p>Hristijan Mitic</p>

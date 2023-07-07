@@ -1,20 +1,28 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "telefonskibroj",  catalog = "db_202223z_va_prj_fmo")
 @IdClass(TelefonskibrojPK.class)
 public class Telefonskibroj {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "id_korisnik")
     private int idKorisnik;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "telefonski_broj")
     private String telefonskiBroj;
+
+    public Telefonskibroj(){}
+
+    public Telefonskibroj(TelefonskibrojPK telefonskibrojPK) {
+        this.idKorisnik = telefonskibrojPK.getIdKorisnik();
+        this.telefonskiBroj = telefonskibrojPK.getTelefonskiBroj();
+    }
 
     public int getIdKorisnik() {
         return idKorisnik;

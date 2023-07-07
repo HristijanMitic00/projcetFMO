@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div th:if="${delivers.size() == 0}"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
+    <h1 style="text-align: center"> No orders to deliver!</h1>
+</div>
+
+<div class="container mb-4" >
+    <div class="row">
+        <div class="col-12" th:if="${delivers.size() > 0}">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Total price</th>
+                        <th scope="col">Date</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="delivery : ${delivers} " class="product">
+                        <td th:text="${delivery.getIdNaracka()}" ></td>
+                        <td th:each="order : ${orders}" th:if="${order.getIdNaracka() == delivery.getIdNaracka()}"
+                        th:text="${order.getAdresa()}"></td>
+                        <td  th:each="order : ${orders}"  th:if="${order.getIdNaracka() == delivery.getIdNaracka()}"
+                            th:text="${order.getVkupnoSuma()}"></td>
+                        <td th:text="${delivery.getDatum()}"
+                        ></td>
+                        <td class="text-right">
+                            <form th:method="POST" th:action="@{'/delivery/{id}' (id=${delivery.getIdDostava()})}">
+                                <button type="submit"
+                                        class="btn btn-sm btn-primary cart-product" sec:authorize="hasRole('ROLE_DELIVER')">
+                                    <i class="fa fa-trash">Order delivered</i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

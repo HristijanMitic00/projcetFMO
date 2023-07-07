@@ -1,10 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<th:block xmlns:th="http://www.thymeleaf.org">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">FMO</h1>
+      <h2 class="jumbotron-heading">Food Market Online</h2>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <form action="/products/add" method="POST">
+          <input id="id" type="hidden" name="id" th:value="(${product} != null ? ${product.getIdProdukt()} : '')">
+          <div class="form-group">
+            <label for="name">Product name</label>
+            <input type="text"
+                   class="form-control"
+                   id="name"
+                   name="name"
+                   th:value="(${product} != null ? ${product.getIme()} : '')"
+                   required
+                   placeholder="Enter product name">
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text"
+                   class="form-control"
+                   id="price"
+                   name="price"
+                   required
+                   th:value="(${price?.getIznos()} )"
+                   placeholder="Price">
+          </div>
+          <div class="form-group">
+            <label for="Description">Description</label>
+            <input type="text"
+                   class="form-control"
+                   id="description"
+                   name="description"
+                   th:value="(${product} != null ? ${product.getOpis()} : '')"
+                   placeholder="Description">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select name="category" class="form-control">
+              <option th:if="${chosen} != null"
+                      th:selected="${chosen.getIdKategorija() != null &&
+                                chosen.getIdKategorija() == cat.getIdKategorija()}"
+                      th:each="cat : ${categories}"
+                      th:value="${cat.getIdKategorija()}"
+                      th:text="${cat.getIme()}">
+              </option>
+              <option th:if="${chosen} == null"
+                      th:each="cat : ${categories}"
+                      th:value="${cat.getIdKategorija()}"
+                      th:text="${cat.getIme()}">
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date from</label>
+           <input type="date"
+                           class="form-control"
+                           id="date"
+                           name="date"
+                           th:value="${price?.getCenaOd()} ?: null"
+                           required>
+          </div>
+          <div class="form-group">
+            <label>Date to</label>
+            <input type="date"
+                   class="form-control"
+                   id="dateTo"
+                   name="dateTo"
+                   th:value="${price?.getCenaDo() }">
+          </div>
+
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+          <a type="button" class="btn btn-primary" href="/products">Back</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</th:block>

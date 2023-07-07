@@ -1,15 +1,18 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "dostavuvac",  catalog = "db_202223z_va_prj_fmo")
 public class Dostavuvac {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "id_korisnik")
     private int idKorisnik;
+
+    public Dostavuvac(){}
 
     public int getIdKorisnik() {
         return idKorisnik;

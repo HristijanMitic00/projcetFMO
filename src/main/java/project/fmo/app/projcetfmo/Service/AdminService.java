@@ -1,2 +1,4 @@
-package project.fmo.app.projcetfmo.Service;public interface AdminService {
+package project.fmo.app.projcetfmo.Service;
+
+public interface AdminService {
 }

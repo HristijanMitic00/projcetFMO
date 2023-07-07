@@ -1,19 +1,21 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import project.fmo.app.projcetfmo.Service.impl.DostavaServiceImpl;
+
+import javax.persistence.*;
 
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "dostava",  catalog = "db_202223z_va_prj_fmo")
 public class Dostava {
-    @Basic
-    @Column(name = "id_korisnik")
-    private int idKorisnik;
-    @Basic
-    @Column(name = "id_naracka")
-    private int idNaracka;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ManyToOne
+    @JoinColumn(name = "id_korisnik")
+    private Dostavuvac dostavuvac;
+    @OneToOne
+    @JoinColumn(name = "id_naracka")
+    private Naracka naracka;
     @Id
     @Column(name = "id_dostava")
     private int idDostava;
@@ -24,20 +26,30 @@ public class Dostava {
     @Column(name = "status")
     private String status;
 
+    public Dostava (){}
+
+    public Dostava(Dostavuvac dostavuvac, Naracka naracka, int idDostava, Date datum, String status) {
+        this.dostavuvac = dostavuvac;
+        this.naracka = naracka;
+        this.idDostava = idDostava;
+        this.datum = datum;
+        this.status = status;
+    }
+
     public int getIdKorisnik() {
-        return idKorisnik;
+        return dostavuvac.getIdKorisnik();
     }
 
     public void setIdKorisnik(int idKorisnik) {
-        this.idKorisnik = idKorisnik;
+        this.dostavuvac.setIdKorisnik(idKorisnik);
     }
 
     public int getIdNaracka() {
-        return idNaracka;
+        return naracka.getIdNaracka();
     }
 
     public void setIdNaracka(int idNaracka) {
-        this.idNaracka = idNaracka;
+        this.naracka.setIdNaracka(idNaracka);
     }
 
     public int getIdDostava() {
@@ -69,11 +81,11 @@ public class Dostava {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dostava dostava = (Dostava) o;
-        return idKorisnik == dostava.idKorisnik && idNaracka == dostava.idNaracka && idDostava == dostava.idDostava && Objects.equals(datum, dostava.datum) && Objects.equals(status, dostava.status);
+        return dostavuvac == dostava.dostavuvac && naracka == dostava.naracka && idDostava == dostava.idDostava && Objects.equals(datum, dostava.datum) && Objects.equals(status, dostava.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idKorisnik, idNaracka, idDostava, datum, status);
+        return Objects.hash(dostavuvac, naracka, idDostava, datum, status);
     }
 }

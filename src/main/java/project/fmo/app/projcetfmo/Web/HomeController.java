@@ -8,12 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping({"/","/home"})
-public class StoreController {
+public class HomeController {
 
 
     @GetMapping
-    public String getHomePage(){
-        return "home";
+    public String getHomePage(Model model){
+        model.addAttribute("bodyContent", "home");
+        return "master_template";
     }
+
+    @GetMapping("/access_denied")
+    public String getAccessDeniedPage(Model model) {
+        model.addAttribute("bodyContent", "access_denied");
+        return "master-template";
+    }
+
 
 }

@@ -1,18 +1,17 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "cena",  catalog = "db_202223z_va_prj_fmo")
 @IdClass(CenaPK.class)
 public class Cena {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_produkt")
-    private int idProdukt;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int  idProdukt;
     @Id
     @Column(name = "cena_od")
     private Date cenaOd;
@@ -22,6 +21,20 @@ public class Cena {
     @Basic
     @Column(name = "iznos")
     private int iznos;
+
+    public Cena(){}
+    public Cena(int idProdukt, Date cenaOd, Date cenaDo, int iznos) {
+        this.idProdukt = idProdukt;
+        this.cenaOd = cenaOd;
+        this.cenaDo = cenaDo;
+        this.iznos = iznos;
+    }
+
+    public Cena(int idProdukt, Date cenaOd, int iznos) {
+        this.idProdukt = idProdukt;
+        this.cenaOd = cenaOd;
+        this.iznos = iznos;
+    }
 
     public int getIdProdukt() {
         return idProdukt;

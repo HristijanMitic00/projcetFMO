@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div xmlns:th="http://www.thymeleaf.org" >
+
+  <form class="block" th:method="post" th:action="@{'/products/{id}/add-to-cart' (id = ${product.getIdProdukt()})}">
+      <input type="hidden" name="idKorisnik" id="idKorisnik" th:value="${#request.getRemoteUser()}">
+      <input type="hidden" name="cena" id="cena" th:value="${price.getIznos()}">
+      <label style="margin: auto; text-align: center; display: block; padding-top: 20px">Product name</label>
+      <p style="margin: auto; text-align: center" id="name" name="name" th:value="${product.getIme()}" th:text="${product.getIme()}"></p>
+      <label style="margin: auto; text-align: center; display: block;  padding-top: 20px">Product description</label>
+      <p style="margin: auto; text-align: center" name="description" id="description"  th:value="${product.getOpis()}" th:text="${product.getOpis()}"></p>
+      <label style="margin: auto; text-align: center; display: block ; padding-top: 20px">price</label>
+      <p style="margin: auto; text-align: center" name="price" id="price" th:value="${price.getIznos()}" th:text="${price.getIznos()}"></p>
+      <label style="margin: auto; text-align: center; display: block;  padding-top: 20px">Category</label>
+      <p style="margin: auto; text-align: center;" name="category" id="category" th:value="${kat.getIme()}" th:text="${kat.getIme()}"></p>
+      <label style="margin: auto; text-align: center; display: block;  padding-top: 20px">Quantity</label>
+      <input type="number" name="quantity" id="quantity" style="margin: auto; text-align: center; display: block" required="required">
+
+
+      <button style="margin: auto; text-align: center; display: block;  padding-top: 20px" id="submit" type="submit" class="btn btn-primary">Submit</button>
+      <a style="margin: auto; text-align: center; display: block;  padding-top: 20px; width: 75px" type="button" class="btn btn-primary" href="/products">Back</a>
+
+  </form>
+
+
+</div>

@@ -1,11 +1,12 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "naracka",  catalog = "db_202223z_va_prj_fmo")
 public class Naracka {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,9 +24,19 @@ public class Naracka {
     @Basic
     @Column(name = "adresa")
     private String adresa;
-    @Basic
-    @Column(name = "id_korisnik")
-    private int idKorisnik;
+    @ManyToOne
+    @JoinColumn(name = "id_korisnik")
+    private Kupuvac kupuvac;
+
+    public Naracka(){}
+
+    public Naracka(int vkupnoSuma, Date datum, String status, String adresa, Kupuvac kupuvac) {
+        this.vkupnoSuma = vkupnoSuma;
+        this.datum = datum;
+        this.status = status;
+        this.adresa = adresa;
+        this.kupuvac = kupuvac;
+    }
 
     public int getIdNaracka() {
         return idNaracka;
@@ -68,11 +79,11 @@ public class Naracka {
     }
 
     public int getIdKorisnik() {
-        return idKorisnik;
+        return kupuvac.getIdKorisnik();
     }
 
     public void setIdKorisnik(int idKorisnik) {
-        this.idKorisnik = idKorisnik;
+        this.kupuvac.setIdKorisnik(idKorisnik);
     }
 
     @Override
@@ -80,11 +91,11 @@ public class Naracka {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Naracka naracka = (Naracka) o;
-        return idNaracka == naracka.idNaracka && vkupnoSuma == naracka.vkupnoSuma && idKorisnik == naracka.idKorisnik && Objects.equals(datum, naracka.datum) && Objects.equals(status, naracka.status) && Objects.equals(adresa, naracka.adresa);
+        return idNaracka == naracka.idNaracka && vkupnoSuma == naracka.vkupnoSuma && kupuvac == naracka.kupuvac && Objects.equals(datum, naracka.datum) && Objects.equals(status, naracka.status) && Objects.equals(adresa, naracka.adresa);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idNaracka, vkupnoSuma, datum, status, adresa, idKorisnik);
+        return Objects.hash(idNaracka, vkupnoSuma, datum, status, adresa, kupuvac);
     }
 }

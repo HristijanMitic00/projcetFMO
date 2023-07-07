@@ -1,6 +1,6 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Objects;
 
@@ -8,11 +8,9 @@ import java.util.Objects;
 @Table(name = "naracka_sodrzi_produkt", schema = "project", catalog = "db_202223z_va_prj_fmo")
 @IdClass(NarackaSodrziProduktPK.class)
 public class NarackaSodrziProdukt {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_produkt")
     private int idProdukt;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_naracka")
     private int idNaracka;
@@ -22,6 +20,15 @@ public class NarackaSodrziProdukt {
     @Basic
     @Column(name = "cena")
     private int cena;
+
+    public NarackaSodrziProdukt(){}
+
+    public NarackaSodrziProdukt(int idProdukt, int idNaracka, int kolicina, int cena) {
+        this.idProdukt = idProdukt;
+        this.idNaracka = idNaracka;
+        this.kolicina = kolicina;
+        this.cena = cena;
+    }
 
     public int getIdProdukt() {
         return idProdukt;

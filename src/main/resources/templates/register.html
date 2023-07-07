@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="container">
+    <h1 th:if="${hasError}" th:text="${error}"></h1>
+</div>
+<div class="container">
+    <form class="form-signin mt-xl-5" method="post" action="/register">
+        <h2 class="form-signin-heading">Register</h2>
+        <p>
+            <label for="name_surname" class="sr-only">Name and Surname</label>
+            <input type="text" id="name_surname" name="name_surname" class="form-control" autocomplete="off" placeholder="name_surname" required=""
+                   autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="off"
+                   required="">
+        </p>
+        <p>
+            <label for="repeatedPassword" class="sr-only">Repeat Password</label>
+            <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control" autocomplete="off"
+                   placeholder="Repeat Password" required="">
+        </p>
+        <p>
+            <label for="mail" class="sr-only">Mail</label>
+            <input type="text" id="mail" name="mail" class="form-control" placeholder="Mail" required="" autofocus="" autocomplete="off">
+        </p>
+        <p>
+            <label for="number" class="sr-only">Telephone number</label>
+            <input type="text" id="number" name="number" class="form-control" placeholder="number" required="" autocomplete="off"
+                   autofocus="">
+        </p>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+</div>
+

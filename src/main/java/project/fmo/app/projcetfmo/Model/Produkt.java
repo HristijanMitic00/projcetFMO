@@ -1,10 +1,12 @@
-package model;
+package project.fmo.app.projcetfmo.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 import java.util.Objects;
 
 @Entity
+@Table(schema = "project", name = "produkt",  catalog = "db_202223z_va_prj_fmo")
 public class Produkt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -16,9 +18,18 @@ public class Produkt {
     @Basic
     @Column(name = "opis")
     private String opis;
-    @Basic
-    @Column(name = "id_korisnik")
-    private int idKorisnik;
+
+    @ManyToOne
+    @JoinColumn(name = "id_korisnik")
+    private AdminKorisnik adminKorisnik;
+
+    public Produkt(){}
+
+    public Produkt(String ime, String opis, AdminKorisnik adminKorisnik) {
+        this.ime = ime;
+        this.opis = opis;
+        this.adminKorisnik = adminKorisnik;
+    }
 
     public int getIdProdukt() {
         return idProdukt;
@@ -45,11 +56,11 @@ public class Produkt {
     }
 
     public int getIdKorisnik() {
-        return idKorisnik;
+        return adminKorisnik.getIdKorisnik();
     }
 
-    public void setIdKorisnik(int idKorisnik) {
-        this.idKorisnik = idKorisnik;
+    public void setIdKorisnik(AdminKorisnik idKorisnik) {
+        this.adminKorisnik = idKorisnik;
     }
 
     @Override
@@ -57,11 +68,11 @@ public class Produkt {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produkt produkt = (Produkt) o;
-        return idProdukt == produkt.idProdukt && idKorisnik == produkt.idKorisnik && Objects.equals(ime, produkt.ime) && Objects.equals(opis, produkt.opis);
+        return idProdukt == produkt.idProdukt && adminKorisnik == produkt.adminKorisnik && Objects.equals(ime, produkt.ime) && Objects.equals(opis, produkt.opis);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idProdukt, ime, opis, idKorisnik);
+        return Objects.hash(idProdukt, ime, opis, adminKorisnik);
     }
 }

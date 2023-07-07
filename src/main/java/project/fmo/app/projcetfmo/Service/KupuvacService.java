@@ -1,2 +1,8 @@
-package project.fmo.app.projcetfmo.Service;public class KupuvacRepository {
+package project.fmo.app.projcetfmo.Service;
+
+import project.fmo.app.projcetfmo.Model.Kupuvac;
+
+public interface KupuvacService {
+
+    Kupuvac findById(Integer id);
 }
